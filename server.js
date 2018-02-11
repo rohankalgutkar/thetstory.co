@@ -4,7 +4,10 @@ const fs = require('fs');
 const port = process.env.PORT || 3001;
 var app = express();
 
-//app.use(express.static(__dirname + '/public/'));
+// Coming soon static html is set @ path /
+app.use('/', express.static(__dirname + '/public/'));
+
+//
 hbs.registerPartials(__dirname + '/views/partials/');
 hbs.registerHelper('getCurrentYear', () => {
   return new Date().getFullYear();
@@ -19,7 +22,7 @@ app.set('view engine', 'hbs');
 //   });
 // });
 
-app.get('/', (req, res) => {
+app.get('/dev', (req, res) => {
   res.render('index.hbs', {
     pageTitle: 'thetstory | Succulents, Terrariums & Home Decor'
   });
