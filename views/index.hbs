@@ -1,44 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{pageTitle}}</title>
-	<!-- Standard -->
-	<link rel="shortcut icon" href="assets/img/ficon.png">
-	<!-- Latest Bootstrap min CSS -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
-	<!-- Dropdownhover CSS -->
-	<link rel="stylesheet" href="assets/css/bootstrap-dropdownhover.min.css" type="text/css">
-	<!-- latest fonts awesome -->
-	<link rel="stylesheet" href="assets/font/css/font-awesome.min.css" type="text/css">
-	<!-- simple line fonts awesome -->
-	<link rel="stylesheet" href="assets/simple-line-icon/css/simple-line-icons.css" type="text/css">
-	<!-- Animate CSS -->
-	<link rel="stylesheet" href="assets/css/animate.min.css" type="text/css">
-	<!-- Style CSS -->
-	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
-	<!--  baguetteBox -->
-	<link rel="stylesheet" href="assets/css/baguetteBox.css">
-	<!-- Owl Carousel Assets -->
-	<link href="assets/owl-carousel/owl.carousel.css" rel="stylesheet">
-	<link href="assets/owl-carousel/owl.theme.css" rel="stylesheet">
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
-</head>
-
+{{> head}}
 <body>
 	<!--  Preloader  -->
 	<!-- <div id="preloader">
 		<div id="loading"> </div>
 	</div> -->
 	{{> header}}
+
+	<div id="home-slider" class="carousel slide carousel-fade" data-ride="carousel">
+    <!-- .home-slider -->
+    <div class="carousel-inner">
+      <div class="item active" style="background-image: url(assets/img/header-6.jpg);  background-repeat: no-repeat; background-position: top;">
+        <div class="caption">
+          <h2 class="animated wow zoomIn" data-wow-duration=".5s" data-wow-delay=".2s">Succulents &amp; Cacti</h2>
+          <p class="animated wow fadeIn" data-wow-duration=".2s" data-wow-delay=".1s">As rich and unique as the coffee beans it is intended for, this little scoop will make your morning ritual a special occasion every day. </p> <a data-scroll class="btn get-start animated fadeInUpBig" href="#"><span>view collection</span></a> </div>
+      </div>
+      <div class="item" style="background-image: url(assets/img/header-7.jpg);  background-repeat: no-repeat; background-position: top;">
+        <div class="caption">
+          <h2 class="animated wow zoomIn" data-wow-duration=".5s" data-wow-delay=".2s">Home Decor</h2>
+          <p class="animated wow fadeIn" data-wow-duration=".2s" data-wow-delay=".1s">As rich and unique as the coffee beans it is intended for, this little scoop will make your morning ritual a special occasion every day. </p> <a data-scroll class="btn get-start animated fadeInUpBig" href="#"><span>view collection</span></a> </div>
+      </div>
+      <div class="item" style="background-image: url(assets/img/header-8.jpg);  background-repeat: no-repeat; background-position: top;">
+        <div class="caption">
+          <h2 class="animated wow zoomIn" data-wow-duration=".5s" data-wow-delay=".2s">Garden Planning</h2>
+          <p class="animated wow fadeIn" data-wow-duration=".2s" data-wow-delay=".1s">As rich and unique as the coffee beans it is intended for, this little scoop will make your morning ritual a special occasion every day. </p> <a data-scroll class="btn get-start animated fadeInUpBig" href="#"><span>view collection</span></a> </div>
+      </div>
+      <!-- indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#home-slider" data-slide-to="0" class="active"></li>
+        <li data-target="#home-slider" data-slide-to="1" class=""></li>
+        <li data-target="#home-slider" data-slide-to="2" class=""></li>
+      </ol>
+      <!-- /indicators -->
+    </div>
+    <!-- /.home-slider -->
+  </div>
+	
 	<section class="banner-outer">
 		<!-- .banner-outer -->
 		<div class="container">
@@ -178,42 +176,7 @@
 	</section>
 
 	{{> footer}}
-	<!--  /main  -->
-	<!-- Get Our Email Letter popup -->
-	<!-- <div class="modal fade modal-popup" id="modal1" data-open-onload="true" data-open-delay="1500" tabindex="-1" role="dialog">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content" style="background-image:url('images/modal-background.jpg'); background-size:cover">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-				<div class="modal-body">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-sm-2 pt-20 text-center">
-							</div>
-							<div class="col-sm-8 pt-20 text-center">
-								<h2 class="heading font34 inverse">
-									Get Our Email Letter</h2>
-								<p class="font22 text-center">Subscribe to the Outstock mailing list to receive updates on new arrivals, special offers and other discount information.</p>
-								<form name="main">
-									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Enter your Email id"> </div>
-									<div class="form-group">
-										<button class="btn btn-black" type="button">Subscribe!</button>
-									</div>
-								</form>
-							</div>
-							<div class="col-sm-2 pt-20 text-center">
-							</div>
-							<div class="col-sm-12">
-								<div class="form-group text-right">
-									<input type="checkbox" name="check" /> Do not show this popup again </div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
-	<!-- /Get Our Email Letter popup -->
+
 	<!--  quick popup  -->
 	<div class="modal fade bwidth" id="quickModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">

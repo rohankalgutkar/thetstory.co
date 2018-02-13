@@ -35,6 +35,12 @@ app.get('/dev', (req, res) => {
   });
 });
 
+app.get('/contact', (req, res) => {
+  res.render('contact.hbs', {
+    pageTitle: 'thetstory | Succulents, Terrariums & Home Decor'
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server is up on port ${port}`);
 });

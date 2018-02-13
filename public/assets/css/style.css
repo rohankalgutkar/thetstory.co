@@ -2043,7 +2043,7 @@ header {
 /*----------- inner-header -----------------------*/
 
 .inner-header {
-	background: rgba(0, 0, 0, 0) url("../images/inside-banner.jpg") no-repeat scroll 0 0 / cover;
+	background: rgba(0, 0, 0, 0) url("../img/inside-banner.jpg") no-repeat scroll 0 0 / cover;
 	color: #282828;
 	padding-bottom: 150px;
 	padding-top: 195px;
