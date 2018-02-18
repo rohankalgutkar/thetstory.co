@@ -142,6 +142,9 @@ p {
 	letter-spacing: 0.04em;
 	margin: 0 0 15px;
 }
+.para p{
+	letter-spacing: 0 !important;
+}
 .tittle {
 	padding-bottom: 38px;
 	position: relative;
@@ -830,7 +833,7 @@ blockquote {
 	background: rgba(0, 0, 0, 0) url("../images/qoute-icon.png") no-repeat scroll 8px 12px;
 	font-size: 16px;
 	font-style: italic;
-	margin: 20px 0 40px;
+	margin: 10px 0 20px;
 	padding: 10px 45px;
 	position: relative;
 	border-left: 2px solid rgb(189, 132, 72);
