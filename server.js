@@ -35,6 +35,12 @@ app.get('/dev', (req, res) => {
   });
 });
 
+app.get('/about', (req, res) => {
+  res.render('about.hbs', {
+    pageTitle: 'thetstory | Succulents, Terrariums & Home Decor'
+  });
+});
+
 app.get('/contact', (req, res) => {
   res.render('contact.hbs', {
     pageTitle: 'thetstory | Succulents, Terrariums & Home Decor'

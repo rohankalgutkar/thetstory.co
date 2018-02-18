@@ -2040,6 +2040,21 @@ header {
 	padding: 50px 0;
 }
 
+/*----------- about-header -----------------------*/
+/*  shares other stuff with inner header*/
+.about-header {
+	background: rgba(0, 0, 0, 0) url("../img/about-header.jpg") no-repeat scroll 0 0 / cover;
+	color: #282828;
+	padding-bottom: 150px;
+	padding-top: 195px;
+	text-align: center;
+}
+
+.about-header2 {
+	background: rgba(0, 0, 0, 0) url("../images/about-banner.jpg") no-repeat scroll 0 0 / cover;
+	color: #282828;
+}
+
 /*----------- inner-header -----------------------*/
 
 .inner-header {
@@ -2053,18 +2068,18 @@ header {
 	background: rgba(0, 0, 0, 0) url("../images/inside-banner.jpg") no-repeat scroll 0 0 / cover;
 	color: #282828;
 }
-.inner-header h2 {
+.inner-header h2, .about-header h2 {
 	color: #282828;
 	font-size: 48px;
 	margin-bottom: 30px;
 }
-.inner-header2 h2 {
+.inner-header2 h2, .about-header h2 {
 	color: #282828;
 }
-.inner-header .bdr ul {
+.inner-header .bdr ul, .about-header .bdr ul{
 	padding: 0;
 }
-.inner-header .bdr li {
+.inner-header .bdr li, .about-header .bdr li {
 	display: inline;
 	padding: 5px;
 }
@@ -3064,8 +3079,8 @@ select {
 	border: none;
 }
 .subscribe h2 {
-	border-top: 1px solid rgb(235, 235, 235);
-	padding-top: 100px;
+	/* border-top: 1px solid rgb(235, 235, 235); */
+	padding-top: 50px;
 	color: #282828;
 }
 .subscribe input[type="text"] {
@@ -3091,7 +3106,7 @@ select {
 	background: #282828;
 }
 .subscribe {
-	padding-bottom: 100px;
+	/* padding-bottom: 100px; */
 }
 
 /*----------- news box -----------------------*/
@@ -3100,7 +3115,7 @@ select {
 	margin-top: 10px;
 }
 .news-text {
-	padding: 50px 0;
+	padding: 20px 0;
 	position: relative;
 }
 .news-text a {
