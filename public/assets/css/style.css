@@ -972,8 +972,9 @@ blockquote {
 #comments #respond {
 	padding-top: 50px;
 }
-#comments #commentform p.comment-form-author,
-#comments #commentform p.comment-form-email {
+#comments #commentform p.comment-form-name,
+#comments #commentform p.comment-form-email,
+#comments #commentform p.comment-form-phone {
 	float: left;
 	width: 100%;
 }
