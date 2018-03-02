@@ -113,6 +113,7 @@ app.post('/contact', urlencodedParser, (req, res) => {
   });
 });
 
+//load record for SKU from DB
 var loadProduct = function(sku, callback) {
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
@@ -126,6 +127,7 @@ var loadProduct = function(sku, callback) {
   });
 };
 
+//Product page
 app.get('/product/:SKU', (req, res) => {
   var sku = req.params['SKU'];
   var data = loadProduct(sku,function (err, data) {
