@@ -1888,7 +1888,7 @@ header {
 .page-title-text div.inline-page-title.border-top::before {
 	left: 0;
 }
-.our-team-page .inline-page-title::before,
+.our-©-page .inline-page-title::before,
 .inline-page-title::after {
 	width: calc((100% - 251px) / 2 - 20px) !important;
 }
@@ -3122,12 +3122,13 @@ select {
 	padding: 20px 0;
 	position: relative;
 }
+/* RK: Changed for about page*/
 .news-text a {
 	color: #282828;
-	display: block;
-	font-size: 20px;
+	display: inline-block;
+	font-size: 19px;
 	font-weight: 500;
-	margin-bottom: 15px;
+	/* margin-bottom: 15px; */
 	text-decoration: none;
 }
 .news-text a:hover {
