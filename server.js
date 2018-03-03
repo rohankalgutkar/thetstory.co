@@ -26,7 +26,6 @@ app.use(function(req, res, next) {
         menuHTML += `</ul>`;
       }
     }
-    console.log("menu HTML = " + menuHTML)
     res.productMenu = menuHTML;
     next();
   });
