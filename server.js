@@ -15,6 +15,37 @@ var url = "mongodb://localhost:27017/";
 // Loading coming soon static assets
 app.use(express.static(path.join(__dirname, 'public')));
 
+//defining HTML string with list of active products for global use
+app.use(function(req, res, next) {
+  getAllProducts(function(err, data) {
+    var menuHTML = `<ul>`;
+    menuHTML += `<li><strong>` + data[0].Category + `</strong></li>`;
+    for(var itrData = 0; itrData < data.length; itrData ++) {
+      menuHTML += `<li><a href="/product/` + data[itrData].SKU + `">` + data[itrData].Description + `</a></li>`;
+      if (itrData == data.length - 1 || data[itrData].Category != data[itrData + 1].Category) {
+        menuHTML += `</ul>`;
+      }
+    }
+    res.productMenu = menuHTML;
+    next();
+  });
+});
+
+//get all products from db ordered by Category and Description
+var getAllProducts = function(callback) {
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db(dbName);
+    dbo.collection("SKU_Master").find({$query: {IsActive : 'Y'}, $orderby: {Category:1, Description:1}}).toArray( function(err, result) {
+      if (err) throw err;
+      if (result) {
+        callback(null, result);
+      }
+      db.close();
+    });
+  });
+};
+
 // body parsing for POST requests
 var urlencodedParser = bodyParser.urlencoded({
   extended: false
@@ -34,28 +65,32 @@ app.get('/', (req, res) => {
 // Home Page
 app.get('/dev', (req, res) => {
   res.render('index.hbs', {
-    pageTitle: 'thetstory | Succulents, Terrariums & Home Decor'
+    pageTitle: 'thetstory | Succulents, Terrariums & Home Decor',
+    productMenu: res.productMenu
   });
 });
 
 // About Us Page
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
-    pageTitle: 'thetstory | Succulents, Terrariums & Home Decor'
+    pageTitle: 'thetstory | Succulents, Terrariums & Home Decor',
+    productMenu: res.productMenu
   });
 });
 
 // Home Page
 app.get('/privacy-policy', (req, res) => {
   res.render('privacy-policy.hbs', {
-    pageTitle: 'thetstory | Succulents, Terrariums & Home Decor'
+    pageTitle: 'thetstory | Succulents, Terrariums & Home Decor',
+    productMenu: res.productMenu
   });
 });
 
 // Contact Us Page
 app.get('/contact', (req, res) => {
   res.render('contact.hbs', {
-    pageTitle: 'thetstory | Succulents, Terrariums & Home Decor'
+    pageTitle: 'thetstory | Succulents, Terrariums & Home Decor',
+    productMenu: res.productMenu
   });
 });
 // Helper for Contact page
@@ -109,7 +144,8 @@ app.post('/contact', urlencodedParser, (req, res) => {
   });
 
   res.render('contact.hbs', {
-    pageTitle: 'thetstory | Succulents, Terrariums & Home Decor'
+    pageTitle: 'thetstory | Succulents, Terrariums & Home Decor',
+    productMenu: res.productMenu
   });
 });
 
@@ -133,9 +169,11 @@ app.get('/product/:SKU', (req, res) => {
   var data = loadProduct(sku,function (err, data) {
     res.render('product.hbs', {
       pageTitle: 'thetstory | Succulents, Terrariums & Home Decor',
-      name: data.name,
-      currency: data.currency,
-      price: data.price
+      productMenu: res.productMenu,
+      description: data.Description,
+      currency: data.Currency,
+      price: data.Price,
+      category: data.Category
     })
   });
 });
