@@ -1,10 +1,18 @@
 import csv
 import sys
+import json
 from pymongo import MongoClient
 
+def initCollection(collectionName, db):
+    print("Creating collection " + collectionName)
+    db.create_collection(collectionName)
+    print("Created collection " + collectionName)
+
 def dropCollection(collectionName, db):
+    print("Dropping collection " + collectionName)
     if collectionName in db.list_collection_names():
         db.drop_collection(collectionName)
+        print("Collection " + collectionName + " dropped")
 
 def createDocument(row):
     document = {}
@@ -27,11 +35,15 @@ else:
         collectionName = fileName.split('/')
         collectionName = collectionName[len(collectionName)-1].split('.')[0]
         dropCollection(collectionName, mDb)
+        initCollection(collectionName, mDb)
         with open(fileName,'rb') as csvFile:
             docArray = []
             reader = csv.reader(csvFile, quotechar='"')
+            next(reader, None)
             for row in reader:
                 doc = createDocument(row)
+                print("Adding document = " + json.dumps(doc))
                 docArray.append(doc)
         if collectionName in mDb.list_collection_names():
             mDb[collectionName].insert_many(docArray)
+            print("Data loaded into " + collectionName)
