@@ -18,7 +18,7 @@ mongoClient.connect(url, function(err, db) {
 mongoClient.connect(url, function(err, db) {
   if (err) throw err;
   var dbo = db.db("tstorydb");
-  var objSample = {SKU : "TS10001", name : "Dummy Product", price : "200", currency : "&#8377;"};
+  var objSample = {SKU : "TS10001", Description : "Dummy Product", Category: "Terrarium", AssetPath: "NA", IsActive: "Y", Price : "200", Currency : "INR"};
   dbo.collection("SKU_Master").insertOne(objSample, function(err, res) {
     if (err) throw err
     console.log("Object inserted!");
