@@ -1,5 +1,5 @@
 var mongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/tstorydb";
+var url = process.env.MONGODB_URI || "mongodb://localhost:27017/tstorydb";
 
 //Init DB and collection - SKU_Master
 mongoClient.connect(url, function(err, db) {
