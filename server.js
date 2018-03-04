@@ -7,11 +7,13 @@ const nodemailer = require('nodemailer');
 
 const path = require('path');
 const port = process.env.PORT || 3001;
-const dbName = 'tstorydb';
+// const dbName = 'tstorydb'; //dev
+const dbName = 'heroku_p2tgc0fn'; //prod
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
 // var url = process.env.MONGODB_URI || "mongodb://localhost:27017/";
-var url = 'mongodb://thetstoryco:Goatee19@ds153978.mlab.com:53978/heroku_p2tgc0fn' || "mongodb://localhost:27017/";
+var url = 'mongodb://thetstoryco:Goatee19@ds153978.mlab.com:53978/heroku_p2tgc0fn'; //prod
+// var url = "mongodb://localhost:27017/"; //dev
 
 // Loading coming soon static assets
 app.use(express.static(path.join(__dirname, 'public')));
