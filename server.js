@@ -12,8 +12,8 @@ const dbName = 'heroku_p2tgc0fn'; //prod
 // const dbName = 'tstorydb'; //dev
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
-var url = process.env.MONGOLAB_URI;
-// var url = "mongodb://heroku_p2tgc0fn:ao412v43bh8tmpi2us46oceifk@ds153978.mlab.com:53978/heroku_p2tgc0fn"; //prod
+// var url = process.env.MONGOLAB_URI;
+var url = "mongodb://heroku_p2tgc0fn:ao412v43bh8tmpi2us46oceifk@ds153978.mlab.com:53978/heroku_p2tgc0fn"; //prod
 // var url = "mongodb://localhost:27017/"; //dev
 
 // Loading coming soon static assets
