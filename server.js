@@ -7,8 +7,9 @@ const nodemailer = require('nodemailer');
 
 const path = require('path');
 const port = process.env.PORT || 3001;
-// const dbName = 'tstorydb'; //dev
+
 const dbName = 'heroku_p2tgc0fn'; //prod
+// const dbName = 'tstorydb'; //dev
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
 // var url = process.env.MONGODB_URI;
@@ -37,7 +38,9 @@ app.use(function(req, res, next) {
 //get all products from db ordered by Category and Description
 var getAllProducts = function(callback) {
   MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
+    if (err) {
+console.log('Unable to connect to the mongoDB server. Error:', err);
+}else{
     var dbo = db.db(dbName);
     dbo.collection("SKU_Master").find({$query: {IsActive : 'Y'}, $orderby: {Category:1, Description:1}}).toArray( function(err, result) {
       if (err) throw err;
@@ -46,6 +49,7 @@ var getAllProducts = function(callback) {
       }
       db.close();
     });
+  }
   });
 };
 
