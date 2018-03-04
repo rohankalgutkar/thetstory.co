@@ -3,6 +3,7 @@ const hbs = require('hbs');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
+const logger = require('./Logger');
 
 
 const path = require('path');
@@ -22,12 +23,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 //defining HTML string with list of active products for global use
 app.use(function(req, res, next) {
   getAllProducts(function(err, data) {
-    var menuHTML = `<ul>`;
-    menuHTML += `<li><strong>` + data[0].Category + `</strong></li>`;
-    for(var itrData = 0; itrData < data.length; itrData ++) {
-      menuHTML += `<li><a href="/product/` + data[itrData].SKU + `">` + data[itrData].Description + `</a></li>`;
-      if (itrData == data.length - 1 || data[itrData].Category != data[itrData + 1].Category) {
-        menuHTML += `</ul>`;
+    var menuHTML = ``;
+    if (data.length > 0) {
+      menuHTML = `<ul>`;
+      menuHTML += `<li><strong>` + data[0].Category + `</strong></li>`;
+      if (data.length == 1)
+        menuHTMl += `</ul>`;
+      else {
+        for(var itrData = 0; itrData < data.length; itrData ++) {
+          menuHTML += `<li><a href="/product/` + data[itrData].SKU + `">` + data[itrData].Description + `</a></li>`;
+          if (itrData == data.length - 1 || data[itrData].Category != data[itrData + 1].Category) {
+            menuHTML += `</ul>`;
+          }
+        }
       }
     }
     res.productMenu = menuHTML;
@@ -39,7 +47,7 @@ app.use(function(req, res, next) {
 var getAllProducts = function(callback) {
   MongoClient.connect(url, function(err, db) {
     if (err) {
-console.log('Unable to connect to the mongoDB server. Error:', err);
+logger.logError('Unable to connect to the mongoDB server. Error:' + err.message);
 }else{
     var dbo = db.db(dbName);
     dbo.collection("SKU_Master").find({$query: {IsActive : 'Y'}, $orderby: {Category:1, Description:1}}).toArray( function(err, result) {
@@ -102,7 +110,7 @@ app.get('/contact', (req, res) => {
 });
 // Helper for Contact page
 app.post('/contact', urlencodedParser, (req, res) => {
-  console.log(req.body);
+  logger.logInfo(req.body);
 
   var htmlBody = `
 <p>You've got a contact request from the Contact page</p>
@@ -145,9 +153,9 @@ app.post('/contact', urlencodedParser, (req, res) => {
   // send mail with defined transport object
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      return console.log(error);
+      return logger.logError(error.message);
     }
-    console.log('Message sent: %s', info.messageId);
+    logger.logInfo('Message sent: %s', info.messageId);
   });
 
   res.render('contact.hbs', {
@@ -159,14 +167,17 @@ app.post('/contact', urlencodedParser, (req, res) => {
 //load record for SKU from DB
 var loadProduct = function(sku, callback) {
   MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db(dbName);
-    dbo.collection("SKU_Master").findOne({SKU: sku}, function(err, result) {
-      if (err) throw err;
-      if (result)
-        callback(null, result);
-      db.close();
-    });
+    if (err)
+      logger.logError('Error while retrieving Product from DB : ' + err.message);
+    else {
+      var dbo = db.db(dbName);
+      dbo.collection("SKU_Master").findOne({SKU: sku}, function(err, result) {
+        if (err) throw err;
+        if (result)
+          callback(null, result);
+        db.close();
+      });
+    }
   });
 };
 
@@ -174,17 +185,21 @@ var loadProduct = function(sku, callback) {
 app.get('/product/:SKU', (req, res) => {
   var sku = req.params['SKU'];
   var data = loadProduct(sku,function (err, data) {
-    res.render('product.hbs', {
-      pageTitle: 'thetstory | Succulents, Terrariums & Home Decor',
-      productMenu: res.productMenu,
-      description: data.Description,
-      currency: data.Currency,
-      price: data.Price,
-      category: data.Category
-    })
+    if (err)
+      logger.logError('Error while loading Product for routing : ' + err.message);
+    else {
+      res.render('product.hbs', {
+        pageTitle: 'thetstory | Succulents, Terrariums & Home Decor',
+        productMenu: res.productMenu,
+        description: data.Description,
+        currency: data.Currency,
+        price: data.Price,
+        category: data.Category
+      })
+    }
   });
 });
 
 app.listen(port, () => {
-  console.log(`Server is up on port ${port}`);
+  logger.logInfo(`Server is up on port ${port}`);
 });
