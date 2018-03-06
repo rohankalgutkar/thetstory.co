@@ -9,7 +9,7 @@ const logger = require('./Logger');
 const path = require('path');
 const port = process.env.PORT || 3001;
 
-const dbName = 'heroku_p2tgc0fn'; //prod
+const dbName = process.env.MONGODB_NAME; //prod
 // const dbName = 'tstorydb'; //dev
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
